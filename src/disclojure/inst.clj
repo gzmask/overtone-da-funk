@@ -4,8 +4,8 @@
             [overtone.inst.synth :as synth]
             [leipzig.live :as live]))
 
-(definst doo [note 60 dur 1.0 amp 1.0]
-  (-> (pan2 (sin-osc (midicps note)) -0.5)
+(definst doo [hertz 440 dur 1.0 amp 1.0]
+  (-> (pan2 (sin-osc hertz) -0.5)
     (* (env-gen (perc 0.05 dur amp) :action FREE))))
 
 

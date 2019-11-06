@@ -12,13 +12,13 @@
 ;;14.5 beats loop
 
 (recording-start "~/sandbox/aho.wav")
+(recording-stop)
 (defsynth my-sin [freq 440]
   (out 0 (pan2 (sin-osc freq))))
 
 (my-sin)
 
 (kill my-sin)
-(recording-stop)
 ((sample "~/sandbox/aho.wav"))
 ((load-sample "~/sandbox/aho.wav"))
 
@@ -26,13 +26,15 @@
   (->> (phrase [2 1/2 1/2 1/2 2  1/2 1/2 1/2 2  1/2 1/2 1/2 2  1  1]
                [0 -1  0   2   -3 -4  -3  -1  -5 -6  -5  -3  -7 -6 -5])
        (where :pitch (comp scale/G scale/minor))
-       (all :part :beep)
-       (all :amp 0.4)
+       (all :part :doo)
+       (all :amp 0.6)
        (times 1)
-       (l/assoc-track :melody)))
+       (l/assoc-track :melody)
+       ))
 (l/assoc-track :melody nil)
 
 (live/jam (l/track))
+(live/play (l/track))
 (live/stop)
 
 (def melody-2

@@ -4,9 +4,10 @@
             [overtone.inst.synth :as synth]
             [leipzig.live :as live]))
 
-(definst doo [freq 440 dur 1.0 amp 1.0]
-  (-> (pan2 (sin-osc freq))
+(definst doo [note 60 dur 1.0 amp 1.0]
+  (-> (pan2 (sin-osc (midicps note)) -0.5)
     (* (env-gen (perc 0.05 dur amp) :action FREE))))
+
 
 (defmethod live/play-note :doo [{hertz :pitch seconds :duration amp :amp}]
   (when hertz
@@ -16,6 +17,7 @@
   (-> freq
     saw
     (* (env-gen (perc 0.02 dur amp) :action FREE))))
+
 
 (defmethod live/play-note :beep [{hertz :pitch seconds :duration amp :amp}]
   (when hertz
